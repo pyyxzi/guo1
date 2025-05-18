@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wzry</title>
+
+    <link rel="stylesheet" href="mdui/css/mdui.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 王者荣耀风格装饰元素 -->
+  <div class="corner-decoration"></div>
+  <div class="corner-decoration-bottom"></div>
+  <div class="top-decoration"></div>
+  <div class="bottom-decoration"></div>
+  
+  <!-- 左上角设置按钮 -->
+  <div class="settings-button" onclick="toggleSettings()"></div>
+  
+  <!-- 左上角设置面板 -->
+  <div class="mini-settings">
+    <div class="mini-settings-title">设置</div>
+    <div class="close-settings" onclick="toggleSettings()">×</div>
+    
+    <div class="settings-nav">
+      <div class="nav-item active" onclick="switchSettingsTab('basic')">基础</div>
+      <div class="nav-item" onclick="switchSettingsTab('prob')">概率</div>
+    </div>
+    
+    <!-- 基础设置 -->
+    <div id="basic-settings" class="settings-content active">
+      <div class="setting-item">
+        <span class="setting-label">点券:</span>
+        <input class="setting-input" id="mnip" type="number">
+        <div class="setting-button" onclick="SaveMoney()">确定</div>
+      </div>
+      
+      <div class="setting-item">
+        <span class="setting-label">积分:</span>
+        <input class="setting-input" id="jfip" type="number">
+        <div class="setting-button" onclick="SaveJf()">确定</div>
+      </div>
+      
+      <div class="setting-item">
+        <span class="setting-label">金币:</span>
+        <input class="setting-input" id="jbip" type="number">
+        <div class="setting-button" onclick="Savejb()">确定</div>
+      </div>
+      
+      <div class="setting-item">
+        <span class="setting-label">钻石:</span>
+        <input class="setting-input" id="zsip" type="number">
+        <div class="setting-button" onclick="Savezs()">确定</div>
+      </div>
+      
+      <div class="setting-item">
+        <span class="setting-label">幸运值:</span>
+        <input class="setting-input" id="xyzip" type="number">
+        <div class="setting-button" onclick="Savexyz()">确定</div>
+      </div>
+      
+      <div class="setting-item">
+        <span class="setting-label">水晶:</span>
+        <input class="setting-input" id="sjip" type="number">
+        <div class="setting-button" onclick="Saverysj()">确定</div>
+      </div>
+      
+      <div class="setting-item">
+        <span class="setting-label">已消费:</span>
+        <input class="setting-input" id="xfip" type="number">
+        <div class="setting-button" onclick="SaveVip()">确定</div>
+      </div>
+      
+      <div class="setting-item">
+        <span class="setting-label">UI显示:</span>
+        <div class="setting-button" style="width:85px" onclick="Xsycycbtn()">切换</div>
+      </div>
+    </div>
+    
+    <!-- 概率设置 -->
+    <div id="prob-settings" class="settings-content">
+      <div class="prob-table">
+        <div class="prob-row" id="probRow0">
+          <input class="prob-input" id="Xgname0" type="text">
+          <input class="prob-value" id="Xggl0" type="text">
+        </div>
+        <div class="prob-row" id="probRow1">
+          <input class="prob-input" id="Xgname1" type="text">
+          <input class="prob-value" id="Xggl1" type="text">
+        </div>
+        <div class="prob-row" id="probRow2">
+          <input class="prob-input" id="Xgname2" type="text">
+          <input class="prob-value" id="Xggl2" type="text">
+        </div>
+        <div class="prob-row" id="probRow3">
+          <input class="prob-input" id="Xgname3" type="text">
+          <input class="prob-value" id="Xggl3" type="text">
+        </div>
+        <div class="prob-row" id="probRow4">
+          <input class="prob-input" id="Xgname4" type="text">
+          <input class="prob-value" id="Xggl4" type="text">
+        </div>
+        <div class="prob-row" id="probRow5">
+          <input class="prob-input" id="Xgname5" type="text">
+          <input class="prob-value" id="Xggl5" type="text">
+        </div>
+        <div class="prob-row" id="probRow6">
+          <input class="prob-input" id="Xgname6" type="text">
+          <input class="prob-value" id="Xggl6" type="text">
+        </div>
+        <div class="prob-row" id="probRow7">
+          <input class="prob-input" id="Xgname7" type="text">
+          <input class="prob-value" id="Xggl7" type="text">
+        </div>
+        <div class="prob-row" id="probRow8">
+          <input class="prob-input" id="Xgname8" type="text">
+          <input class="prob-value" id="Xggl8" type="text">
+        </div>
+        <div class="prob-row" id="probRow9">
+          <input class="prob-input" id="Xgname9" type="text">
+          <input class="prob-value" id="Xggl9" type="text">
+        </div>
+        <div class="prob-row" id="probRow10">
+          <input class="prob-input" id="Xgname10" type="text">
+          <input class="prob-value" id="Xggl10" type="text">
+        </div>
+        <div class="prob-row" id="probRow11">
+          <input class="prob-input" id="Xgname11" type="text">
+          <input class="prob-value" id="Xggl11" type="text">
+        </div>
+        <div class="prob-row" id="probRow12">
+          <input class="prob-input" id="Xgname12" type="text">
+          <input class="prob-value" id="Xggl12" type="text">
+        </div>
+        <div class="prob-row" id="probRow13">
+          <input class="prob-input" id="Xgname13" type="text">
+          <input class="prob-value" id="Xggl13" type="text">
+        </div>
+      </div>
+      <div class="prob-buttons">
+        <div class="prob-button" onclick="ChangeGailv()">确定</div>
+        <div class="prob-button" onclick="ResetGailv()">重置</div>
+      </div>
+    </div>
+  </div>
+  
+  <img src="img/redpoint.png" class="jdredpoint" alt="">
+
+<div class="Jfdbbox">
+ 
+  <div class="xyznum">058</div>
+<video src="vd/jf_bg.mp4"  autoplay="" loop="" muted="" ></video>
+<div class="rysdbtn" onclick="Showbox('.rysjdh')"></div>
+<!-- 积分抽奖背景视频 -->
+<div class="jlnumjdbox"><span class="boxnum">0</span>/<span class="maxboxnum">5</span></div>
+<div class="jf_cjbtn" onclick="JfChou(1)"></div>
+<div class="jf_cjbtn fivebtn"  onclick="JfChou(5)"></div>
+<!-- 积分抽奖按钮部分 -->
+<div class="numbox">
+  <div class="numtextbox text_jf">9999</div>
+  <div class="numtextbox text_jb" >99999</div>
+  <div class="numtextbox text_zs">9999</div>
+  <div class="numtextbox text_mn">99990</div>
+</div>
+<div class="add_money wzbtn" onclick="Showbox('.czbox')"></div>
+</div>
+
+<div class="abox jfbuzubox tipbgbox">
+  <div class="tipbtn tip_qx btn" onclick="CloseBox('.jfbuzubox')"></div>
+  <div class="tipbtn tip_qr btn" onclick="openBuyjf();"></div>
+</div>
+
+
+<div class="abox rysjbox" style="z-index: 200;display: none;background-image: url('img/sjbg2.png');">
+  <video id="sjbg" src="vd/sjbg.mp4"  autoplay="" loop="" muted="" ></video>
+  <div class="btn rysjjfcgqrbtn" onclick="ShutJldh()"></div>
+</div>
+
+<div class="abox rysjdh" style="z-index: 21;display: none;">
+  <div class="numbox">
+    <div class="numtextbox "></div>
+    <div class="numtextbox " ></div>
+    <div class="numtextbox text_sjsl">9999</div>
+    <div class="numtextbox text_mn">99990</div>
+  </div>
+  <div class="gbczing ycbtn" style="width: 50px; height: 30px; top: 16px; left: 30px; position: fixed; z-index: 4321; border: 0px solid red;" onclick="$('.rysjdh').css('display','none');$('.xyznum').removeClass('xyznumdhua')"></div>
+  <video src="vd/rydh.mp4"   autoplay="" loop="" ></video>
+</div>
+
+
+
+
+
+
+
+<!-- 积分不足提示盒子 -->
+
+<div class="abox dqbuzubox tipbgbox" style="display: none;">
+  
+  <div class="gbczing ycbtn" style="width: 30px; height: 30px; top: 99px; left: 774px; position: fixed; z-index: 4321; border: 0px solid red;" onclick="CloseBox('.dqbuzubox')"></div>
+    
+  <div class="dqbztipbox"></div>
+  <div class="dqbztext">还需<span class="chadqtext">3840</span>点券即可获取酷炫机甲礼包，是否立即购买<span class="gmdqtext">6480</span>点券?</div>
+  <div class="chadqtext" style="position: absolute;color: rgb(243, 243, 243);left: 284px;top: 354px;font-size: 13px;">3840</div>
+  <div class="tipbtn tip_qtje btn" onclick=""></div>
+  <div class="tipbtn tip_qtje2 btn" onclick=""><span class="gmje">648</span>元</div>
+</div>
+<!-- 点券不足提示盒子 -->
+<div class="abox buyJfbox">
+  <div class="gbczing ycbtn" style="width: 30px; height: 30px; top: 65px; left: 841px; position: fixed; z-index: 4321; border: 0px solid red;" onclick="$('.buyJfbox').css('display','none');"></div>
+    
+  <div class="buyjftipbox">
+    <div class="jian_btn jiande_btn btn"  onclick="AddBuyjfnum(-1)"></div>
+    <div class="jian_btn jia_btn btn" onclick="AddBuyjfnum(1)"></div>
+    <div class="jf_slidebox progress">
+      <div class="jf_slide btn progress_btn" style="opacity: 1;"></div>
+      <div class="jf_slidetiao progress_bar"></div>
+    </div>
+    <div class="jfaddnum pgtext">1</div>
+    <div class="buyjfqrbtn btn" onclick="BuyJf()">
+      <img src="img/buybtndqlogo.png" width="22px" style="margin-top: 6px;vertical-align: -0.2em;" alt="">
+      <span class="Buyjfmnnum">60</span>
+    </div>
+  </div>
+
+</div>
+<!-- 购买积分盒子 -->
+<div class="abox buyjfcgbox" style="z-index: 999;">
+  <video src="vd/buyjfcg.mp4" id="buyjfcgvd"  autoplay="" loop="false" muted="" ></video>
+  <div class="jfgmcgtext jfgmcgtext1">14</div>
+  <div class="jfgmcgtext jfgmcgtext2">840</div>
+  <div class="btn jfcgqrbtn" onclick="CloseBox('.buyjfcgbox')"></div>
+</div>
+<!-- 购买积分成功盒子 -->
+<div class="abox Jfchoubox" style="display: none;">
+  <div class="gbczing ycbtn" style="width: 50px; height: 30px; top: 16px; left: 30px; position: fixed; z-index: 4321; border: 0px solid red;" onclick="$('.Jfchoubox').css('display','none');$('.xyznum').removeClass('xyznumdhua')"></div>
+  <video src="vd/jfdb_begin.mp4" id="jfchoubgvd" onclick="BeginChou()" autoplay="" loop="false" muted="" ></video>
+</div>
+
+<div class="abox Jlibox" style="display: none;z-index: 120;">
+  <div class="btn zm1cbtn" onclick="zm1ci()"></div>
+  <div class="btn zm1cbtn zm1cqrbtn" onclick="CloseBox('.Jlibox')"></div>
+  <video src="vd/jltip0.mp4" id="jltipbgvd" onclick="" autoplay="" loop muted="" ></video>
+  <img src="img/jlLight.gif" class="Dcshine" alt="">
+  <div class="jlimgboxdc"><img src="img/jl/9.png" id="dcimg" alt="">
+<div class="wljltext" id="wljltextdc">钻石</div>
+</div>
+</div>
+
+<div class="abox Jlibox5" style="display: none;z-index: 120;" onclick="">
+  <div class="btn zm1cbtn zm5c" onclick="zm1ci()"></div>
+  <div class="btn zm1cbtn zm1cqrbtn" onclick="CloseBox('.Jlibox5')"></div>
+  <video src="vd/jltip1.mp4" id="jltipbgvd5" onclick="" autoplay="" loop muted="" ></video>
+
+<div class="fivejlul">
+  <div class="fivejlli" id="fivejlli0" style="margin-left: 0;">
+    <img src="img/jlLight.gif" class="Wlshine " id="Wlshine0" alt="" >
+    <div class="jlimgbox5l" id="jlwlimgbox0" >
+      <img src="img/jl/9.png" alt="" id="wljlimg0">
+      <div class="wljltext" id="wljltext0">钻石</div>
+      </div>
+  </div>
+
+  <div class="fivejlli" id="fivejlli1">
+    <img src="img/jlLight.gif" class="Wlshine" id="Wlshine1" alt="">
+    <div class="jlimgbox5l" id="jlwlimgbox1">
+      <img src="img/jl/9.png" alt="" id="wljlimg1">
+      <div class="wljltext" id="wljltext1">钻石</div>
+      </div>
+  </div>
+
+  <div class="fivejlli" id="fivejlli2">
+    <img src="img/jlLight.gif" class="Wlshine" id="Wlshine2" alt="">
+    <div class="jlimgbox5l" id="jlwlimgbox2">
+      <img src="img/jl/9.png" alt="" id="wljlimg2">
+      <div class="wljltext" id="wljltext2">钻石</div>
+      </div>
+  </div>
+
+  <div class="fivejlli" id="fivejlli3">
+    <img src="img/jlLight.gif" class="Wlshine" id="Wlshine3" alt="">
+    <div class="jlimgbox5l" id="jlwlimgbox3">
+      <img src="img/jl/9.png" alt="" id="wljlimg3">
+      <div class="wljltext" id="wljltext3">幸运夺宝自选礼包</div>
+      </div>
+      
+  </div>
+
+  <div class="fivejlli" id="fivejlli4" >
+    <img src="img/jlLight.gif" class="Wlshine" id="Wlshine4" alt="">
+    <div class="jlimgbox5l" id="jlwlimgbox4">
+      <img src="img/jl/9.png" alt="" id="wljlimg4">
+      <div class="wljltext" id="wljltext4">钻石</div>
+      </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<div class="abox czbox" style="z-index: 21;display: none;">
+  <img src="img/vip/0.png" class="czviplog" alt="">
+  <div class="vipjdbox">
+    <div class="vipjdt"></div>
+  </div>
+
+  <div class="zxfsj">再消费<img src="img/buybtndqlogo.png" width="22px" alt=""><span class="yellowfont chadssj">10</span>升级到</div>
+  <div class="viptitle yellowfont">贵族<span class="guizuxj">1</span></div>
+  <div class="gbczing ycbtn" style="width: 50px; height: 30px; top: 16px; left: 30px; position: fixed; z-index: 4321; border: 0px solid red;" onclick="$('.czbox').css('display','none');AddTopTip('点券购买已取消')"></div>
+    
+
+  <div class="czzhezhao abox"  style="display: none;">
+    <img src="img/czaq.png" class="czaqimg"  width="160px" alt="">
+    <div class="fukuanbg fukuanbg1" onclick="wepay();" style="display: none;">
+      <div class="gbczing ycbtn" style="width: 15px; height: 15px; top: 146px; left: 36px; position: fixed; z-index: 4321; border: 0px solid red;" onclick="$('.czzhezhao').css('display','none');AddTopTip('点券购买已取消')"></div>
+    
+      <div style="position: absolute;top:194px;margin-top: -135px;text-align: center;width: 100%;"><div style="font-weight: 500;">王者荣耀点券</div>
+      <div style="font-size: 38px;margin-top: 5px;">￥<span class="czmoney">648.00</span>.00</div></div>
+  
+    </div>
+    <img src="img/czewm.png" class="czewm" height="298px" style="display: none; position: absolute; top: 131px; left: 325px;" onclick="Czcg()" alt="">
+    <img src="img/sysmzf.png" class="sysmzf" height="200px" style="display: none; position: absolute; top: 190px; left: 350px;" onclick="Jixucz()" alt="">
+  
+  
+  
+  </div>
+  <!-- 充值遮罩盒子 -->
+  <div class="abox czload2">
+    <img src="img/czload2.png" width="100px" style="" alt="">
+  </div>
+  <div class="czcgbox abox">
+    <div class="fukuanbg czcgbg"  onclick="CloseBox('.czcgbox');CloseBox('.czzhezhao')" style="display: block;" >
+      <div  style="position: absolute;top:194px;margin-top: -135px;text-align: center;width: 100%;font-weight: bold;"><div>王者荣耀点券<span class="czdquan"></span></div>
+      <div style="font-size: 12px;margin-top: 28px;text-align: right;padding-right: 18px;color: rgb(177, 177, 177);"><span class="czmoney">328</span>.00元</div></div>
+  
+    </div>
+  </div>
+  <!-- 充值加载 -->
+  <div class="numtextbox czdqnum text_mn" style="font-size: 14px;">99990</div>
+  <div class="dqmenubox">
+    <div class="czmbox">
+      <div class="czimg"></div>
+      <div class="czbtn" onclick="ShowChongzhi(-1)">1元</div>
+    </div>
+
+    <div class="czmbox">
+      <div class="czimg" style="background-image: url('img/czimg/6.png');"></div>
+      <div class="czbtn" onclick="ShowChongzhi(0)">6元</div>
+    </div>
+
+    <div class="czmbox">
+      <div class="czimg" style="background-image: url('img/czimg/18.png');"></div>
+      <div class="czbtn" onclick="ShowChongzhi(1)">18元</div>
+    </div>
+
+    <div class="czmbox">
+      <div class="czimg" style="background-image: url('img/czimg/30.png');"></div>
+      <div class="czbtn" onclick="ShowChongzhi(2)">30元</div>
+    </div>
+
+    <div class="czmbox">
+      <div class="czimg" style="background-image: url('img/czimg/68.png');"></div>
+      <div class="czbtn" onclick="ShowChongzhi(3)">68元</div>
+    </div>
+
+    <div class="czmbox">
+      <div class="czimg" style="background-image: url('img/czimg/118.png');"></div>
+      <div class="czbtn" onclick="ShowChongzhi(4)">118元</div>
+    </div>
+    
+    <div class="czmbox">
+      <div class="czimg" style="background-image: url('img/czimg/198.png');"></div>
+      <div class="czbtn" onclick="ShowChongzhi(5)">198元</div>
+    </div>
+
+    <div class="czmbox">
+      <div class="czimg" style="background-image: url('img/czimg/348.png');"></div>
+      <div class="czbtn" onclick="ShowChongzhi(6)">348元</div>
+    </div>
+
+    <div class="czmbox">
+      <div class="czimg" style="background-image: url('img/czimg/648.png');"></div>
+      <div class="czbtn" onclick="ShowChongzhi(7)">648元</div>
+    </div>
+
+    <div class="czmbox">
+      <div class="czimg" style="background-image: url('img/czimg/898.png');"></div>
+      <div class="czbtn" onclick="ShowChongzhi(8)">898元</div>
+    </div>
+
+    <div class="czmbox">
+      <div class="czimg" style="background-image: url('img/czimg/1298.png');"></div>
+      <div class="czbtn" onclick="ShowChongzhi(9)">1298元</div>
+    </div>
+
+    <div class="czmbox" style="opacity: 0;">
+      <div class="czimg" style="background-image: url('img/czimg/6.png');"></div>
+      <div class="czbtn">1元</div>
+    </div>
+
+
+  </div>
+</div>
+<!-- 充值盒子 -->
+
+    <div class="mdui-drawer mdui-drawer-right" id="drawer" style="background-color:#1a2848;width: 300px;padding: 5px;color:#e0d8b8;background-image: url('img/set_bg.png');background-size: cover;border-left: 2px solid #b3925d;">
+      <style>
+      .Setinput{
+        width: 115px;
+        text-align: center;
+        color: #e0d8b8;
+        margin-bottom: 2px;
+        margin-top: 2px;
+        font-size: 12px;
+        border-radius: 3px;
+        border: #b3925d 1px solid;
+        padding: 2px;
+        background-color: rgba(0,0,0,0.5);
+      }
+      .gailvtable tr:hover{
+        transition-duration: 0.2s;
+        transform: scale(1.05);
+      }
+      .mdui-list-item-content{
+        font-size: 12px;
+        color: #e0d8b8;
+      }
+      .wzry-btn {
+        background: linear-gradient(to bottom, #b3925d, #785a35);
+        color: #fff;
+        border: 1px solid #b3925d;
+        border-radius: 3px;
+        padding: 4px 10px;
+        font-size: 12px;
+        cursor: pointer;
+        text-align: center;
+        margin: 5px 0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      }
+      .wzry-btn:hover {
+        background: linear-gradient(to bottom, #d4af74, #b3925d);
+      }
+      .wzry-title {
+        color: #e0d8b8;
+        text-align: center;
+        font-size: 16px;
+        margin: 10px 0;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        border-bottom: 1px solid #b3925d;
+        padding-bottom: 5px;
+      }
+      .mdui-list {
+        background-color: rgba(0,0,0,0.3);
+        border-radius: 5px;
+        border: 1px solid #b3925d;
+        padding: 5px;
+      }
+      .mdui-textfield-input {
+        background-color: rgba(0,0,0,0.3);
+        border: 1px solid #b3925d;
+        color: #e0d8b8;
+        border-radius: 3px;
+        padding: 4px 8px;
+      }
+      .mdui-panel-item {
+        background-color: rgba(0,0,0,0.3);
+        border: 1px solid #b3925d;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+      .mdui-panel-item-header {
+        background-color: rgba(25,40,70,0.8);
+        color: #e0d8b8;
+      }
+      .mdui-panel-item-title {
+        color: #e0d8b8;
+      }
+      .mdui-panel-item-body {
+        color: #e0d8b8;
+      }
+      .gailvtable {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .gailvtable th {
+        background-color: rgba(25,40,70,0.8);
+        color: #b3925d;
+        padding: 5px;
+        border: 1px solid #785a35;
+      }
+      .gailvtable td {
+        padding: 2px;
+        border: 1px solid #785a35;
+      }
+      </style> 
+      <div class="wzry-title">王者荣耀设置</div>
+      <span class="left"></span>
+        <span class="top"></span>
+        <br> <span class="cha"></span>
+        <ul class="mdui-list" style="text-align: center;">
+          <li class="mdui-list-item mdui-ripple">
+            <div class="mdui-list-item-content  mdui-color-grey-800" ondblclick="Xsycycbtn();">双击隐藏/显示UI</div>
+          </li>
+          <!--li class="mdui-list-item mdui-ripple">
+            <div class="mdui-list-item-content">用户ID：</div> <br>
+            <input class="mdui-textfield-input" type="text" placeholder="微信号/QQ号">
+          </li>
+          <li class="mdui-list-item mdui-ripple">
+         
+            <div class="mdui-list-item-content">用户昵称：</div> <br>
+            <input class="mdui-textfield-input" type="text" placeholder="给一个昵称">
+          </li-->
+          <li class="mdui-list-item mdui-ripple">
+            
+            <div class="mdui-list-item-content">点券数量：</div> <br>
+            <input class="money mdui-textfield-input" id="mnip" type="number" placeholder="输入整数">
+           &nbsp; <button class="wzry-btn" onclick="SaveMoney();">确定</button>
+      
+            <br> 
+          </li>
+          <li class="mdui-list-item mdui-ripple">
+            
+            <div class="mdui-list-item-content">积分数量：</div> <br>
+            <input class="cjbi mdui-textfield-input" id="jfip" type="number" placeholder="输入整数">
+           &nbsp; <button class="wzry-btn" onclick="SaveJf()">确定</button>
+      
+            <br> 
+          </li>
+          <li class="mdui-list-item mdui-ripple">
+            
+            <div class="mdui-list-item-content">金币等级：</div> <br>
+            <input class="xklev mdui-textfield-input" id="jbip" type="number" placeholder="输入整数">
+           &nbsp; <button class="wzry-btn" onclick="Savejb();">确定</button>
+      
+            <br> 
+          </li>
+          <li class="mdui-list-item mdui-ripple">
+            
+            <div class="mdui-list-item-content">钻石数量：</div> <br>
+            <input class="xkzip mdui-textfield-input" id="zsip" type="number" placeholder="输入整数">
+           &nbsp; <button class="wzry-btn" onclick="Savezs()">确定</button>
+      
+            <br> 
+          </li>
+          <li class="mdui-list-item mdui-ripple">
+            
+            <div class="mdui-list-item-content">幸运值：</div> <br>
+            <input class="xkzip mdui-textfield-input" id="xyzip" type="number" placeholder="输入整数">
+           &nbsp; <button class="wzry-btn" onclick="Savexyz()">确定</button>
+      
+            <br> 
+          </li>
+          <li class="mdui-list-item mdui-ripple">
+            
+            <div class="mdui-list-item-content">荣耀水晶数量：</div> <br>
+            <input class="xkzip mdui-textfield-input" id="sjip" type="number" placeholder="输入整数">
+           &nbsp; <button class="wzry-btn" onclick="Saverysj()">确定</button>
+      
+            <br> 
+          </li>
+          <li class="mdui-list-item mdui-ripple">
+            
+            <div class="mdui-list-item-content">已消费点券：</div> <br>
+            <input class="xkzip mdui-textfield-input" id="xfip" type="number" placeholder="输入整数">
+           &nbsp; <button class="wzry-btn" onclick="SaveVip()">确定</button>
+      
+            <br> 
+          </li>
+          <!--li class="mdui-subheader">更多</li>
+          <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">email</i>
+            <div class="mdui-list-item-content">All mail</div>
+          </li>
+          <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">delete</i>
+            <div class="mdui-list-item-content">Trash</div>
+          </li>
+          <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">error</i>
+            <div class="mdui-list-item-content" onclick="Tiaodagailv()">Spam</div>
+          </li-->
+        </ul>
+        <div class="mdui-panel" mdui-panel="">
+          <div class="mdui-panel-item">
+            <div class="mdui-panel-item-header">
+              <div class="mdui-panel-item-title">积分概率</div>
+              <div class="mdui-panel-item-summary" id="gailvtip" style="color: rgba(255, 91, 91,0);transition-duration: 0.5s;">已重置</div>
+              <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <div class="mdui-panel-item-body">
+              <table cellpadding="0" cellspacing="0" class="gailvtable" style="margin: 0; margin-left: -10px;">
+                <tbody>
+                    <tr>
+                        <th style="width: 70%;">道具名</th>
+                        <th style="width: 30%;">修改概率</th>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput " type="text" id="Xgname0" value="QBZ03-冠军之薇皮肤"></td>
+                        <td><input class="Setinput" type="text" id="Xggl0" value="0.15"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput" type="text" id="Xgname1" value="柯尔特-冠军之特"></td>
+                        <td><input class="Setinput" type="text" id="Xggl1" value="0.20"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput" type="text" id="Xgname2" value="火麒麟-冠军之心皮肤"></td>
+                        <td><input class="Setinput" type="text" id="Xggl2" value="0.30"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput" type="text" id="Xgname3" value="毁灭-冠军之怒皮肤"></td>
+                        <td><input class="Setinput" type="text" id="Xggl3" value="0.30"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput" type="text" id="Xgname4" value="雷神-冠军之魄皮肤"></td>
+                        <td><input class="Setinput" type="text" id="Xggl4" value="0.30"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput" type="text" id="Xgname5" value="修罗-冠军之魂皮肤"></td>
+                        <td><input class="Setinput" type="text" id="Xggl5" value="0.60"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput" type="text" id="Xgname6" value="黄金猫猫手套-白鲨"></td>
+                        <td><input class="Setinput" type="text" id="Xggl6" value="0.15"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput" type="text" id="Xgname7" value="擎天-惨叫迹"></td>
+                        <td><input class="Setinput" type="text" id="Xggl7" value="0.40"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput" type="text" id="Xgname8" value="绝迹语音包兑换券"></td>
+                        <td><input class="Setinput" type="text" id="Xggl8" value="0.15"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput" type="text" id="Xgname9" value="N9语音包兑换券"></td>
+                        <td><input class="Setinput" type="text" id="Xggl9" value="0.15"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput" type="text" id="Xgname10" value="70KG语音包兑换券"></td>
+                        <td><input class="Setinput" type="text" id="Xggl10" value="0.15"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput" type="text" id="Xgname11" value="白鲨语音包兑换券"></td>
+                        <td><input class="Setinput" type="text" id="Xggl11" value="0.15"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput" type="text" id="Xgname12" value="1000经验值"></td>
+                        <td><input class="Setinput" type="text" id="Xggl12" value="1.00"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput" type="text" id="Xgname13" value="500经验值"></td>
+                        <td><input class="Setinput" type="text" id="Xggl13" value="7.00"></td>
+                    </tr>
+                    <!-- <tr>
+                        <td><input class="Setinput" type="text" id="Xgname14" value="200经验值"></td>
+                        <td><input class="Setinput" type="text" id="Xggl14" value="46.00"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Setinput" type="text" id="Xgname15" value="100经验值"></td>
+                        <td><input class="Setinput" type="text" id="Xggl15" value="43.00"></td>
+                    </tr>
+                    <tr>
+                      <td><input class="Setinput " type="text" id="Xgname16" value="QBZ03-冠军之薇皮肤"></td>
+                      <td><input class="Setinput" type="text" id="Xggl16" value="0.15"></td>
+                  </tr>
+                  <tr>
+                      <td><input class="Setinput" type="text" id="Xgname17" value="柯尔特-冠军之特"></td>
+                      <td><input class="Setinput" type="text" id="Xggl17" value="0.20"></td>
+                  </tr>
+                  <tr>
+                      <td><input class="Setinput" type="text" id="Xgname18" value="火麒麟-冠军之心皮肤"></td>
+                      <td><input class="Setinput" type="text" id="Xggl18" value="0.30"></td>
+                  </tr>
+                  <tr>
+                      <td><input class="Setinput" type="text" id="Xgname19" value="毁灭-冠军之怒皮肤"></td>
+                      <td><input class="Setinput" type="text" id="Xggl19" value="0.30"></td>
+                  </tr>
+                  <tr>
+                      <td><input class="Setinput" type="text" id="Xgname20" value="雷神-冠军之魄皮肤"></td>
+                      <td><input class="Setinput" type="text" id="Xggl20" value="0.30"></td>
+                  </tr>
+                  <tr>
+                      <td><input class="Setinput" type="text" id="Xgname21" value="修罗-冠军之魂皮肤"></td>
+                      <td><input class="Setinput" type="text" id="Xggl21" value="0.60"></td>
+                  </tr>
+                  <tr>
+                      <td><input class="Setinput" type="text" id="Xgname22" value="黄金猫猫手套-白鲨"></td>
+                      <td><input class="Setinput" type="text" id="Xggl22" value="0.15"></td>
+                  </tr>
+                  <tr>
+                      <td><input class="Setinput" type="text" id="Xgname23" value="擎天-惨叫迹"></td>
+                      <td><input class="Setinput" type="text" id="Xggl23" value="0.40"></td>
+                  </tr>
+                  <tr>
+                      <td><input class="Setinput" type="text" id="Xgname24" value="绝迹语音包兑换券"></td>
+                      <td><input class="Setinput" type="text" id="Xggl24" value="0.15"></td>
+                  </tr>
+                  <tr>
+                      <td><input class="Setinput" type="text" id="Xgname25" value="N9语音包兑换券"></td>
+                      <td><input class="Setinput" type="text" id="Xggl25" value="0.15"></td>
+                  </tr> -->
+    
+    
+    
+    
+                  <!-- <tr>
+                      <td><input class="Setinput" type="text" id="Xgname26" value="70KG语音包兑换券"></td>
+                      <td><input class="Setinput" type="text" id="Xggl26" value="0.15"></td>
+                  </tr>
+                  <tr>
+                      <td><input class="Setinput" type="text" id="Xgname27" value="白鲨语音包兑换券"></td>
+                      <td><input class="Setinput" type="text" id="Xggl27" value="0.15"></td>
+                  </tr> -->
+               
+          
+                 
+                </tbody>
+            </table>
+              <div class="mdui-panel-item-actions" style="padding-left: 0;">
+                <button class="wzry-btn" onclick="ChangeGailv()">确定</button>
+                <button class="wzry-btn" onclick="ResetGailv()">重置</button>
+              </div>
+            </div>
+          </div>
+    
+         
+        </div>
+      
+      </div>
+    <!-- 控制台 -->
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="mdui/js/mdui.js"></script>
+    <script src="js.js"></script>
+<script src="fuzhu.js"></script>
+<script>
+  Sxsj();
+      var x1=0;
+var y1=0;
+        document.addEventListener("click", function (e) {
+   
+   $(".left").text("左:"+e.clientX)
+   
+  
+   $(".top").text("上:"+e.clientY)
+   if(x1==0)
+   {
+x1=e.clientX
+y1=e.clientY
+   }
+   else
+   {
+     $(".cha").text("左差:"+(x1-e.clientX)+"  上差:"+(y1-e.clientY))
+     x1=0
+y1=0
+   }
+})
+
+// 切换设置面板显示/隐藏
+function toggleSettings() {
+  if($('.mini-settings').css('display') === 'none') {
+    $('.mini-settings').fadeIn(300);
+  } else {
+    $('.mini-settings').fadeOut(300);
+  }
+}
+
+    </script>
+</body>
+</html>

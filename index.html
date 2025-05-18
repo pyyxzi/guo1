@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王者荣耀</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            background: #0a0a1a;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* 背景动画效果 */
+        .bg-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-wrapper:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://game.gtimg.cn/images/yxzj/web201706/images/comm/bg_wrapper.jpg') no-repeat center center;
+            background-size: cover;
+            animation: bg-zoom 20s infinite alternate;
+        }
+        
+        .bg-wrapper:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(10, 10, 26, 0.4) 0%, rgba(10, 10, 26, 0.8) 70%, rgba(10, 10, 26, 0.9) 100%);
+        }
+        
+        @keyframes bg-zoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        
+        /* 光效粒子 */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 215, 110, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { transform: translateY(-20px) translateX(10px); opacity: 0.7; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .logo {
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        
+        .logo h1 {
+            font-size: 64px;
+            margin: 0;
+            color: transparent;
+            background: linear-gradient(to right, #ffda8a, #f8c053, #d39b29, #ffda8a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 0 15px rgba(248, 192, 83, 0.7);
+            letter-spacing: 4px;
+            position: relative;
+            animation: text-shine 3s infinite linear;
+            font-weight: 800;
+        }
+        
+        @keyframes text-shine {
+            0% { background-position: 0%; }
+            100% { background-position: 200%; }
+        }
+        
+        .logo h1:after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(248, 192, 83, 0.9);
+            animation: text-pulse 2s infinite;
+        }
+        
+        @keyframes text-pulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.8; }
+        }
+        
+        .description {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 60px;
+            color: #a0a0d0;
+            text-shadow: 0 0 5px rgba(160, 160, 208, 0.5);
+            line-height: 1.6;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(to bottom, #f8c053, #d39b29);
+            border: 2px solid #ffda8a;
+            border-radius: 5px;
+            color: #111;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(248, 192, 83, 0.6), inset 0 0 5px rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            letter-spacing: 1px;
+            text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+        }
+        
+        .nav-button:before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: -1;
+            transform: scale(0);
+            transition: all 0.5s;
+            border-radius: 50%;
+        }
+        
+        .nav-button:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 30px rgba(248, 192, 83, 1), inset 0 0 10px rgba(255, 255, 255, 0.7);
+            color: #000;
+        }
+        
+        .nav-button:hover:before {
+            transform: scale(1);
+        }
+        
+        .nav-button:hover:after {
+            left: 100%;
+        }
+        
+        .decoration {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: url('https://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/513/513-bigskin-1.jpg') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            filter: brightness(0.7) grayscale(0.3);
+            box-shadow: 0 0 30px rgba(0, 0, 255, 0.6);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float-element 6s infinite ease-in-out;
+        }
+        
+        .decoration-1 {
+            right: 10%;
+            top: 20%;
+            animation-delay: 0s;
+        }
+        
+        .decoration-2 {
+            left: 10%;
+            bottom: 15%;
+            background-image: url('https://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/157/157-bigskin-1.jpg');
+            animation-delay: 2s;
+        }
+        
+        @keyframes float-element {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: #6a6a8e;
+            font-size: 14px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-buttons {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .logo h1 {
+                font-size: 42px;
+            }
+            
+            .decoration {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-wrapper"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="logo">
+            <h1 data-text="王者风云">王者农药</h1>
+        </div>
+        
+        
+        <div class="nav-buttons">
+            <a href="index1.html" class="nav-button">郭氏春秋</a>
+            <a href="index2.html" class="nav-button">积分夺宝</a>
+        </div>
+    </div>
+    
+    <div class="decoration decoration-1"></div>
+    <div class="decoration decoration-2"></div>
+    
+    <div class="footer">
+        © 2024 王者风云 版权所有
+    </div>
+    
+    <script>
+        // 创建粒子效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // 随机大小
+                const size = Math.random() * 8 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // 随机位置
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                
+                // 随机动画延迟
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        });
+    </script>
+</body>
+</html>

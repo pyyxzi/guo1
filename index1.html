@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>郭氏春秋</title>
+    <link rel="icon" href="music/王者荣耀.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "微软雅黑", Arial, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            background: #0a0a1a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        /* 动态背景 */
+        #bg-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        /* 入口内容区域 */
+        .entrance-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+        
+        /* LOGO区域 */
+        .logo-container {
+            margin-bottom: 60px;
+            transform: scale(0);
+            animation: scaleIn 1s forwards 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .logo {
+            font-family: "华文行楷", "楷体", serif;
+            font-size: 72px;
+            font-weight: bold;
+            text-align: center;
+            color: transparent;
+            background: linear-gradient(135deg, #f9f3c5, #e8bb4a, #f1d572, #ffeb8d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            position: relative;
+            letter-spacing: 10px;
+            transition: transform 0.3s;
+        }
+        
+        .logo::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #e8bb4a, transparent);
+            transform: scaleX(0.7);
+            opacity: 0.7;
+        }
+        
+        .sub-title {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #a9b8e6;
+            text-shadow: 0 0 10px rgba(70, 130, 255, 0.5);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s forwards 1s;
+        }
+        
+        /* 入口按钮 */
+        .entrance-button {
+            margin-top: 80px;
+            position: relative;
+            padding: 20px 65px;
+            font-size: 28px;
+            letter-spacing: 5px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #3371e3, #4680f0, #5e9eff);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(70, 130, 255, 0.5);
+            overflow: hidden;
+            transform: scale(0);
+            animation: scaleIn 0.8s forwards 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .entrance-button::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg, #3371e3, #4680f0, #5e9eff, #3371e3);
+            background-size: 400% 400%;
+            z-index: -1;
+            border-radius: 55px;
+            animation: glowing 3s ease-in-out infinite;
+            opacity: 0.7;
+        }
+        
+        .entrance-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent);
+            border-radius: 50px;
+        }
+        
+        .entrance-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.5),
+                0 0 50px rgba(70, 130, 255, 0.8);
+        }
+        
+        .entrance-button:active {
+            transform: translateY(2px);
+        }
+        
+        /* 装饰元素 */
+        .decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .decoration-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            transform: scale(0);
+            animation: decorScale 1.5s forwards cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .decoration-circle:nth-child(1) {
+            width: 700px;
+            height: 700px;
+            border: 10px solid #4680f0;
+            top: -250px;
+            right: -150px;
+            animation-delay: 0.5s;
+        }
+        
+        .decoration-circle:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            border: 8px solid #e8bb4a;
+            bottom: -200px;
+            left: -100px;
+            animation-delay: 0.7s;
+        }
+        
+        .decoration-logo {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-image: url('music/王者荣耀.ico');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+        }
+        
+        .decoration-logo:nth-child(3) {
+            top: 10%;
+            left: 5%;
+            transform: scale(0.8);
+        }
+        
+        .decoration-logo:nth-child(4) {
+            bottom: 10%;
+            right: 5%;
+            transform: scale(0.6) rotate(30deg);
+        }
+        
+        /* 动画效果 */
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+            }
+            70% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes decorScale {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.15;
+            }
+        }
+        
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes glowing {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 50px;
+            }
+            
+            .sub-title {
+                font-size: 18px;
+            }
+            
+            .entrance-button {
+                padding: 15px 40px;
+                font-size: 22px;
+            }
+        }
+        
+        /* 描述文字样式 */
+        .description {
+            margin-top: 30px;
+            max-width: 700px;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #e0e8ff;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s forwards 1.5s;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            padding: 0 20px;
+            font-family: "楷体", "STKaiti", serif;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, rgba(70, 130, 255, 0), rgba(70, 130, 255, 0.1), rgba(70, 130, 255, 0));
+            padding: 15px 25px;
+            border-radius: 10px;
+        }
+        
+        /* 作者信息区域 */
+        .author-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            background: rgba(30, 30, 60, 0.75);
+            padding: 8px 15px;
+            border-radius: 50px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3),
+                       0 0 15px rgba(70, 130, 255, 0.4);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(100, 150, 255, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s forwards 2s;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .author-info:hover {
+            background: rgba(40, 40, 80, 0.85);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4),
+                       0 0 20px rgba(70, 130, 255, 0.6);
+        }
+        
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(100, 150, 255, 0.6);
+            box-shadow: 0 0 10px rgba(70, 130, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .author-info:hover .author-avatar {
+            transform: rotate(10deg);
+            border-color: rgba(230, 200, 100, 0.8);
+            box-shadow: 0 0 15px rgba(230, 200, 100, 0.6);
+        }
+        
+        .author-text {
+            margin-left: 12px;
+            font-size: 14px;
+            color: #c0d0ff;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <!-- 动态背景 -->
+    <canvas id="bg-canvas"></canvas>
+    
+    <!-- 装饰元素 -->
+    <div class="decoration">
+        <div class="decoration-circle"></div>
+        <div class="decoration-circle"></div>
+        <div class="decoration-logo"></div>
+        <div class="decoration-logo"></div>
+    </div>
+    
+    <!-- 主内容区域 -->
+    <div class="entrance-container">
+        <div class="logo-container">
+            <h1 class="logo">郭氏春秋</h1>
+            <!-- <p class="sub-title">王者荣耀战绩殿堂</p> -->
+            <p class="description">郭同学对《王者荣耀》情有独钟，为记录其峡谷征战的精彩历程，特此打造专属页面'郭氏春秋'，铭刻其王者之路的荣耀与成长。</p>
+        </div>
+        
+        <button class="entrance-button" id="enter-button">进入殿堂</button>
+    </div>
+    
+    <!-- 作者信息 -->
+    <div class="author-info">
+        <img src="music/coolboy.jpg" alt="作者头像" class="author-avatar">
+        <span class="author-text">独家定制 | 专属呈现</span>
+    </div>
+    
+    <script>
+        // 背景粒子特效
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 设置canvas尺寸
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        // 初始化设置
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+        
+        // 粒子系统
+        const particles = [];
+        const particleCount = 120;
+        const particleMaxSize = 3;
+        const maxSpeed = 0.5;
+        const connectionDistance = 200;
+        
+        // 初始化粒子
+        function initParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    speedX: (Math.random() - 0.5) * maxSpeed,
+                    speedY: (Math.random() - 0.5) * maxSpeed,
+                    size: Math.random() * particleMaxSize + 1,
+                    color: i % 5 === 0 ? '#e8bb4a' : '#4680f0', // 金色和蓝色交替
+                    opacity: Math.random() * 0.5 + 0.2
+                });
+            }
+        }
+        
+        // 绘制粒子
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 暗背景渐变
+            const gradient = ctx.createRadialGradient(
+                canvas.width / 2, canvas.height / 2, 0,
+                canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height) / 1.5
+            );
+            gradient.addColorStop(0, '#101042');
+            gradient.addColorStop(1, '#050510');
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制连接线
+            ctx.lineWidth = 0.5;
+            
+            // 绘制粒子和连接线
+            particles.forEach((particle, index) => {
+                // 更新位置
+                particle.x += particle.speedX;
+                particle.y += particle.speedY;
+                
+                // 边界处理
+                if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+                if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+                
+                // 绘制粒子
+                ctx.globalAlpha = particle.opacity;
+                ctx.fillStyle = particle.color;
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // 绘制连接线
+                for (let j = index + 1; j < particles.length; j++) {
+                    const otherParticle = particles[j];
+                    const dx = particle.x - otherParticle.x;
+                    const dy = particle.y - otherParticle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < connectionDistance) {
+                        ctx.globalAlpha = 0.2 * (1 - distance / connectionDistance);
+                        ctx.strokeStyle = particle.color === '#e8bb4a' ? '#e8bb4a' : '#4680f0';
+                        ctx.beginPath();
+                        ctx.moveTo(particle.x, particle.y);
+                        ctx.lineTo(otherParticle.x, otherParticle.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            
+            ctx.globalAlpha = 1;
+        }
+        
+        // 动画循环
+        function animate() {
+            drawParticles();
+            requestAnimationFrame(animate);
+        }
+        
+        // 启动粒子系统
+        initParticles();
+        animate();
+        
+        // 入口按钮点击事件
+        document.getElementById('enter-button').addEventListener('click', function() {
+            // 添加点击效果
+            this.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                // 跳转到3D相册页面
+                window.location.href = 'coolguys.html';
+            }, 300);
+        });
+        
+        // 添加鼠标移动特效
+        document.addEventListener('mousemove', function(e) {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            // 粒子跟随鼠标移动
+            particles.forEach(particle => {
+                const dx = mouseX - particle.x;
+                const dy = mouseY - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 150) {
+                    const angle = Math.atan2(dy, dx);
+                    const force = (150 - distance) / 1500;
+                    particle.speedX += Math.cos(angle) * force;
+                    particle.speedY += Math.sin(angle) * force;
+                    
+                    // 限制最大速度
+                    const speed = Math.sqrt(particle.speedX * particle.speedX + particle.speedY * particle.speedY);
+                    if (speed > maxSpeed) {
+                        particle.speedX = (particle.speedX / speed) * maxSpeed;
+                        particle.speedY = (particle.speedY / speed) * maxSpeed;
+                    }
+                }
+            });
+            
+            // LOGO轻微跟随鼠标
+            const logo = document.querySelector('.logo');
+            const moveX = (mouseX - window.innerWidth / 2) / window.innerWidth * 10;
+            const moveY = (mouseY - window.innerHeight / 2) / window.innerHeight * 5;
+            logo.style.transform = `perspective(1000px) rotateY(${moveX}deg) rotateX(${-moveY}deg)`;
+        });
+    </script>
+</body>
+</html>
